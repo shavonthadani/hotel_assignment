@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Form</title>
+    <script>
+        function addField(containerId, inputName) {
+            var container = document.getElementById(containerId);
+            var index = container.querySelectorAll('input').length;
+            var newField = document.createElement('div');
+            newField.innerHTML = `<label>${inputName.includes('phone_numbers') ? 'Phone Number' : 'Email'}:</label><input type="text" name="${inputName}-${index}">`;
+            container.appendChild(newField);
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Booking Form</h2>
+    <form method="POST">
+        <h4>Returning Customer? Enter your id here</h2>
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.customer_id.label }} {{ form.customer_id }}
+            </div>
+            <h4>New Customer? Register here</h4>
+                <div>
+                    {{ form.street_number.label }} {{ form.street_number }}
+                </div>
+                <div>
+                    {{ form.street_name.label }} {{ form.street_name }}
+                </div>
+                <div>
+                    {{ form.apt_number.label }} {{ form.apt_number }}
+                </div>
+                <div>
+                    {{ form.city.label }} {{ form.city }}
+                </div>
+                <div>
+                    {{ form.state.label }} {{ form.state }}
+                </div>
+                <div>
+                    {{ form.zip_code.label }} {{ form.zip_code }}
+                </div>
+                <div>
+                    {{ form.first_name.label }} {{ form.first_name }}
+                </div>
+                <div>
+                    {{ form.middle_name.label }} {{ form.middle_name }}
+                </div>
+                <div>
+                    {{ form.last_name.label }} {{ form.last_name }}
+                </div>
+                <fieldset>
+                    <legend>Phone Numbers</legend>
+                    <div id="phone-numbers-container"></div>
+                    <button type="button"
+                        onclick="addField('phone-numbers-container', 'phone_numbers-__prefix__-phone_number')">Enter
+                        Phone
+                        Number</button>
+                </fieldset>
+                <fieldset>
+                    <legend>Emails</legend>
+                    <div id="emails-container"></div>
+                    <button type="button" onclick="addField('emails-container', 'emails-__prefix__-email')">Enter
+                        Email</button>
+                </fieldset>
+                <div>
+                    {{ form.submit() }}
+                </div>
+    </form>
+    <script>
+        // Initial fields addition
+        addField('phone-numbers-container', 'phone_numbers-__prefix__-phone_number');
+        addField('emails-container', 'emails-__prefix__-email');
+    </script>
+</body>
+
+</html>
